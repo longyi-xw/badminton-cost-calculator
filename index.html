@@ -13,45 +13,49 @@
         }
         body {
             background-color: #f5f5f5;
-            padding: 20px;
+            padding: 15px;
             color: #333;
+            font-size: 14px;
         }
         .container {
-            max-width: 800px;
+            max-width: 100%;
             margin: 0 auto;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            overflow: hidden;
         }
         h1 {
             text-align: center;
             color: #2c3e50;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
+            font-size: 1.4rem;
         }
         .input-section {
             background: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
             color: #2c3e50;
+            font-size: 0.95rem;
         }
         input, select {
             width: 100%;
-            padding: 10px;
+            padding: 8px 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 0.95rem;
         }
         button {
             background-color: #3498db;
@@ -60,64 +64,77 @@
             padding: 10px 15px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 0.95rem;
             transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 5px;
         }
         button:hover {
             background-color: #2980b9;
         }
         .players-list {
-            margin-top: 15px;
+            margin-top: 12px;
         }
         .player-item {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             margin-bottom: 10px;
             padding: 10px;
             background: white;
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            gap: 8px;
         }
-        .player-item input {
+        .player-inputs {
+            display: flex;
+            gap: 8px;
+        }
+        .player-name {
+            flex: 2;
+        }
+        .player-expense {
             flex: 1;
-            margin-right: 10px;
         }
         .remove-btn {
             background-color: #e74c3c;
-            padding: 5px 10px;
+            padding: 8px;
+            font-size: 0.9rem;
         }
         .remove-btn:hover {
             background-color: #c0392b;
         }
         .results {
-            margin-top: 25px;
+            margin-top: 20px;
             display: none;
         }
         .result-card {
             background: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .result-card h3 {
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             border-bottom: 1px solid #eee;
             padding-bottom: 5px;
+            font-size: 1.1rem;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 8px;
+            font-size: 0.85rem;
         }
         th, td {
-            padding: 10px;
+            padding: 8px 5px;
             text-align: left;
             border-bottom: 1px solid #eee;
         }
         th {
             background-color: #f2f2f2;
+            font-size: 0.9rem;
         }
         .positive {
             color: #27ae60;
@@ -129,9 +146,61 @@
         }
         .summary {
             background-color: #ecf0f1;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        .payment-list {
+            margin: 10px 0;
+        }
+        .payment-list ul {
+            padding-left: 20px;
+        }
+        .payment-list li {
+            margin-bottom: 5px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            color: #7f8c8d;
+            font-size: 0.8rem;
+        }
+        
+        /* 平板和桌面端适配 */
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+                padding: 20px;
+            }
+            .container {
+                max-width: 700px;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+            .input-section {
+                padding: 15px;
+            }
+            .player-item {
+                flex-direction: row;
+                align-items: center;
+            }
+            .player-inputs {
+                flex: 1;
+            }
+            .remove-btn {
+                width: auto;
+                margin-top: 0;
+            }
+            button {
+                width: auto;
+                margin-top: 0;
+            }
+            table {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -142,7 +211,7 @@
         <div class="input-section">
             <div class="form-group">
                 <label for="totalAmount">总费用（元）</label>
-                <input type="number" id="totalAmount" placeholder="输入总费用">
+                <input type="number" id="totalAmount" placeholder="输入总费用，留空则自动计算">
             </div>
             
             <div class="form-group">
@@ -188,6 +257,10 @@
                 </div>
             </div>
         </div>
+        
+        <div class="footer">
+            <p>羽毛球费用平摊计算器 | 使用说明：添加球友并输入已支出金额，指定收款人后点击计算</p>
+        </div>
     </div>
 
     <script>
@@ -211,8 +284,10 @@
                 const playerItem = document.createElement('div');
                 playerItem.className = 'player-item';
                 playerItem.innerHTML = `
-                    <input type="text" class="player-name" placeholder="球友姓名" value="球友${playerCount}">
-                    <input type="number" class="player-expense" placeholder="已支出金额">
+                    <div class="player-inputs">
+                        <input type="text" class="player-name" placeholder="球友姓名" value="球友${playerCount}">
+                        <input type="number" class="player-expense" placeholder="已支出金额">
+                    </div>
                     <button type="button" class="remove-btn" data-id="${playerId}">删除</button>
                 `;
                 
@@ -243,7 +318,7 @@
                 
                 // 当姓名输入框内容变化时，更新选择列表
                 playerItem.querySelector('.player-name').addEventListener('input', function() {
-                    const id = this.parentNode.querySelector('.remove-btn').getAttribute('data-id');
+                    const id = this.parentNode.parentNode.querySelector('.remove-btn').getAttribute('data-id');
                     const option = payerSelect.querySelector(`option[value="${id}"]`);
                     if (option) {
                         option.textContent = this.value || `球友${id.replace('player', '')}`;
@@ -303,6 +378,9 @@
                 
                 // 显示结果区域
                 resultsSection.style.display = 'block';
+                
+                // 滚动到结果区域
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
             });
             
             // 显示平摊结果
@@ -379,19 +457,19 @@
                 `;
                 
                 if (payments.receive.length > 0) {
-                    html += '<h4>应收款：</h4><ul>';
+                    html += '<div class="payment-list"><h4>应收款：</h4><ul>';
                     payments.receive.forEach(payment => {
-                        html += `<li>从 ${payment.name} 收款：${payment.amount.toFixed(2)}元</li>`;
+                        html += `<li>从 ${payment.name} 收款：<span class="negative">${payment.amount.toFixed(2)}元</span></li>`;
                     });
-                    html += '</ul>';
+                    html += '</ul></div>';
                 }
                 
                 if (payments.pay.length > 0) {
-                    html += '<h4>应转账：</h4><ul>';
+                    html += '<div class="payment-list"><h4>应转账：</h4><ul>';
                     payments.pay.forEach(payment => {
-                        html += `<li>向 ${payment.name} 转账：${payment.amount.toFixed(2)}元</li>`;
+                        html += `<li>向 ${payment.name} 转账：<span class="positive">${payment.amount.toFixed(2)}元</span></li>`;
                     });
-                    html += '</ul>';
+                    html += '</ul></div>';
                 }
                 
                 paymentDetails.innerHTML = html;
